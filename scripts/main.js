@@ -37,3 +37,59 @@ btnReservar.addEventListener('click', () => {
     detalleReserva.innerText = resumen;
     resumenDiv.style.display = 'block';
 });
+
+
+function calcularPresupuesto() {
+    const ingreso = parseFloat(document.getElementById('ingreso').value);
+    const gastos = parseFloat(document.getElementById('gastos').value);
+    const ahorro = parseFloat(document.getElementById('ahorro').value);
+
+    if (isNaN(ingreso) || isNaN(gastos) || isNaN(ahorro) || ingreso <= 0 || gastos < 0 || ahorro < 0 || ahorro > 100) {
+        alert('Por favor, ingrese valores válidos.');
+        return;
+    }
+
+    const ahorroDeseado = (ingreso * ahorro) / 100;
+    const saldoDisponible = ingreso - gastos - ahorroDeseado;
+
+    const resultadoDiv = document.getElementById('resultado');
+    resultadoDiv.style.display = 'block';
+
+    if (saldoDisponible >= 0) {
+        resultadoDiv.innerHTML = `
+            <p><strong>Resultados:</strong></p>
+            <p>Ahorro Deseado: $${ahorroDeseado.toFixed(2)}</p>
+            <p>Saldo Disponible después de Ahorro y Gastos: $${saldoDisponible.toFixed(2)}</p>
+        `;
+    } else {
+        resultadoDiv.innerHTML = `
+            <p><strong>Resultados:</strong></p>
+            <p>Ahorro Deseado: $${ahorroDeseado.toFixed(2)}</p>
+            <p style="color: red;">No es posible cubrir los gastos y el ahorro deseado. Falta $${Math.abs(saldoDisponible).toFixed(2)}</p>
+        `;
+    }
+}
+
+function calcularROI() {
+    const ganancias = parseFloat(document.getElementById('ganancias').value);
+    const inversion = parseFloat(document.getElementById('inversion').value);
+
+    if (isNaN(ganancias) || isNaN(inversion) || inversion <= 0) {
+        alert('Por favor, ingrese valores válidos.');
+        return;
+    }
+
+    const roi = ((ganancias - inversion) / inversion) * 100;
+
+    const resultadoDiv = document.getElementById('resultado');
+    resultadoDiv.style.display = 'block';
+
+    resultadoDiv.innerHTML = `
+        <p><strong>Resultados:</strong></p>
+        <p>Retorno de Inversión (ROI): <strong>${roi.toFixed(2)}%</strong></p>
+    `;
+
+    if (roi < 0) {
+        resultadoDiv.innerHTML += `<p class="error">El ROI es negativo. La inversión no fue rentable.</p>`;
+    }
+}
