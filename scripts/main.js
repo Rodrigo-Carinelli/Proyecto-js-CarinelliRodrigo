@@ -93,3 +93,4 @@ function calcularROI() {
         resultadoDiv.innerHTML += `<p class="error">El ROI es negativo. La inversión no fue rentable.</p>`;
     }
 }
+
