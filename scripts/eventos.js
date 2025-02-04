@@ -1,22 +1,22 @@
 window.addEventListener('DOMContentLoaded', () => {
-    // Selección de elementos del DOM
+    
     const dishInput = document.getElementById('dishInput');
     const addDishButton = document.getElementById('addDishButton');
     const menuList = document.getElementById('menuList');
 
-    // Función para cargar los platos desde LocalStorage
+    
     function loadMenu() {
     const menu = JSON.parse(localStorage.getItem('menu')) || [];
     menuList.innerHTML = '';
     menu.forEach((dish, index) => renderDish(dish, index));
     }
 
-    // Función para guardar los platos en LocalStorage
+    
     function saveMenu(menu) {
     localStorage.setItem('menu', JSON.stringify(menu));
     }
 
-    // Función para renderizar un plato en el DOM
+    
     function renderDish(dish, index) {
     const li = document.createElement('li');
     li.className = dish.available ? 'available' : 'unavailable';
@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', () => {
     menuList.appendChild(li);
     }
 
-    // Función para agregar un nuevo plato
+    
     function addDish() {
     const dishName = dishInput.value.trim();
     if (dishName === '') {
@@ -54,7 +54,7 @@ window.addEventListener('DOMContentLoaded', () => {
     dishInput.value = '';
     }
 
-    // Función para marcar/desmarcar un plato como disponible
+    
     function toggleDishAvailability(index) {
     const menu = JSON.parse(localStorage.getItem('menu')) || [];
     menu[index].available = !menu[index].available;
@@ -62,7 +62,7 @@ window.addEventListener('DOMContentLoaded', () => {
     loadMenu();
     }
 
-    // Función para eliminar un plato
+    
     function deleteDish(index) {
     const menu = JSON.parse(localStorage.getItem('menu')) || [];
     menu.splice(index, 1);
@@ -70,7 +70,7 @@ window.addEventListener('DOMContentLoaded', () => {
     loadMenu();
     }
 
-    // Asignar eventos
+    
     addDishButton.addEventListener('click', addDish);
-    loadMenu(); // Cargar los platos guardados al iniciar
+    loadMenu(); 
 });
